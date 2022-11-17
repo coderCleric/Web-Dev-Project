@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class ConnectionHandler {
-	private String databaseName;
-	private String databasePassword;
+	private static String databaseName = "test";
+	private static String databasePassword = "test";
 	private static Connection savedConnection = null;
 	
 	//Sets up and returns the connection to the database
@@ -16,7 +16,7 @@ public class ConnectionHandler {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection mycon = DriverManager.getConnection("jdbc:mysql://localhost:3306/example_database","root","0uterW!ldsAETBGD");
+            Connection mycon = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + databaseName,"root", databasePassword);
             savedConnection = mycon;
             return mycon;
 		} catch(Exception e) {
