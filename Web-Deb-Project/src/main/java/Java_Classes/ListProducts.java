@@ -42,7 +42,7 @@ public class ListProducts extends HttpServlet {
             ResultSet records=null;
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                mycon = DriverManager.getConnection("jdbc:mysql://localhost:3306/db1","root","cba321");
+                mycon = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","cba321");
                 sql_stmt = mycon.createStatement();  
                 records = sql_stmt.executeQuery("select * from project2.cat_food");
                 
@@ -56,6 +56,7 @@ public class ListProducts extends HttpServlet {
                 out2.println("<th>Food Description</th>");
                 out2.println("<th>Price</th>");
                 out2.println("<th>Availability</th>");
+                out2.println("<th>&nbsp</th>");
 
                 out2.println("</tr>");
                 
@@ -66,6 +67,11 @@ public class ListProducts extends HttpServlet {
                         out2.println("<td>" + records.getString("description") + "</td>");
                         out2.println("<td>" + records.getString("customer_price") + "</td>");
                         out2.println("<td>" + records.getString("number_stocked") + "</td>");
+                        out2.println("<form action='Cart' method='post'>");
+                        out2.println("<td><input type='submit' name='buy' value='Add to Cart'/></td>");
+                        out2.println("<input type='hidden' name='newProduct' value='"+records.getString("id")+"'/>");
+                        
+                        out2.println("</form>"); 
                         out2.println("</tr>");                    
                 }
                 out2.println("</table><br />");
