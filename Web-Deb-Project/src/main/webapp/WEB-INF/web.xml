@@ -1,0 +1,4 @@
+<servlet-mapping>
+    <servlet-name>ListProducts</servlet-name>
+    <url-pattern>/ListProducts</url-pattern>
+</servlet-mapping>
