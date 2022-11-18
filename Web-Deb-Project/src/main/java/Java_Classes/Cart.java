@@ -34,16 +34,28 @@ public class Cart extends HttpServlet {
 			customerCart = new HashMap<>();
 			session.setAttribute("customerCart", customerCart);
 		}
-		Integer addedProductID = Integer.parseInt(request.getParameter("newProduct"));
+		
+		String addedProductID = request.getParameter("newProduct");
+		String modifiedProduct = request.getParameter("modifiedProduct");
+		String modifiedQuantity = request.getParameter("modifiedQuantity");
+		out.print(Constants.PRE_CONTENT_TEMPLATE);
 		
 		synchronized(customerCart) {
 			if (addedProductID != null) {
-				if (customerCart.containsKey(addedProductID)) {
-					customerCart.put(addedProductID, customerCart.get(addedProductID) + 1);
+				Integer addedProductID_int = Integer.parseInt(addedProductID);
+				if (customerCart.containsKey(addedProductID_int)) {
+					customerCart.put(addedProductID_int, customerCart.get(addedProductID_int) + 1);
 				} else {
-					customerCart.put(addedProductID, 1);	
+					customerCart.put(addedProductID_int, 1);	
 				}
 			}
+			
+			if (modifiedProduct != null && modifiedQuantity != null) {
+				customerCart.put(Integer.parseInt(modifiedProduct), Integer.parseInt(modifiedQuantity));
+				if (Integer.parseInt(modifiedQuantity) == 0)
+					customerCart.remove(Integer.parseInt(modifiedProduct));
+			}
+		
 			
 			if (customerCart.size() == 0) out.println("<h1>Your cart is empty.</h1>");
 			else {
@@ -73,7 +85,11 @@ public class Cart extends HttpServlet {
 			                out.println("<td>" + records.getString("description") + "</td>");
 			                out.println("<td>" + records.getString("customer_price") + "</td>");
 			                out.println("<td>" + records.getString("number_stocked") + "</td>");
-			                out.println("<td>" + customerCart.get(productID) + "</td>");
+	                        out.println("<td><form action='Cart' method='post'>");
+	                        out.println("<input type='hidden' name='modifiedProduct' value='"+productID+"'/>");
+	                        out.println("<input type='number' name='modifiedQuantity' value='" + customerCart.get(productID) +"'/>");
+	                        out.println("<input type='submit' name='buy' value='Update quantity in cart'/>");
+	                        out.println("</form></td>");
 						}
 						out.println("</tr>");
 			        } catch (SQLException e) {
@@ -83,6 +99,7 @@ public class Cart extends HttpServlet {
 				out.println("</table>");
 			}
 		}
+		out.print(Constants.POST_CONTENT_TEMPLATE);
 		
 	}
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
