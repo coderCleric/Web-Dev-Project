@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="Java_Classes.ConnectionHandler" %>
+<%@ page import="Java_Classes.ConnectionHandler, java.sql.*" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,12 +15,30 @@
 			String givenUsername = request.getParameter("givenUsername");
 			String givenPassword = request.getParameter("givenPassword");
 			
-			//Find if the username and password are valid (not done yet)
+			//Get the table column for the entered username
+			Connection mycon = ConnectionHandler.getConnection();
+			Statement sql_stmt = mycon.createStatement();
+			ResultSet results = sql_stmt.executeQuery("select * from employees where username = '" + givenUsername + "'");
 			
-			//If they are, store the corresponding user ID in the session
+			//If the login info is valid, store the corresponding user ID in the session
+			boolean loginValid = false;
+			while(results.next()) {
+				if(results.getString("password").equals(givenPassword)) {
+					session.setAttribute("userID", results.getString("id"));
+					loginValid = true;
+					break;
+				}
+			}
 			
 			//Print a message, telling them if they were successful
-			out.print(givenUsername + "<br>\n" + givenPassword);
+			if(loginValid)
+				out.println("<h1>Login Successful!<h1><br>");
+			else
+				out.println("<h1>Login Failed...<h1><br>");
 		%>
+		
+		<!-- Make the buttons to return to the homepage or login screen -->
+		<a href = "Homepage.jsp"><button>Return to Homepage</button></a>
+		<a href = "Login.jsp"><button>Return to Login</button></a>
 	</body>
 </html>

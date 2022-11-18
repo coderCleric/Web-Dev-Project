@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class ConnectionHandler {
-	private static String databaseName = "test";
-	private static String databasePassword = "test";
+	private static String databaseName = "cat_database";
+	private static String databasePassword = "0uterW!ldsAETBGD";
 	private static Connection savedConnection = null;
 	
 	//Sets up and returns the connection to the database
@@ -20,6 +20,8 @@ public class ConnectionHandler {
             savedConnection = mycon;
             return mycon;
 		} catch(Exception e) {
+			System.out.println("Connection handler failed");
+			e.printStackTrace();
 			return null;
 		}
 	}
