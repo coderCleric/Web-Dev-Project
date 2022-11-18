@@ -30,6 +30,11 @@
 					<a href = "Login.jsp">Login</a><br>
 					<a href = "Products.jsp">Products List</a><br>
 					<a href = "Cart.jsp">Cart</a>
+					<!-- These links should only exist if the user is logged in -->
+					<%
+						if(session.getAttribute("userID") != null)
+							out.println("<br><a href = 'ModifyProduct.jsp'>Modify Products</a><br>");
+					%>
 				</td>
 			</tr>
 		</table>
