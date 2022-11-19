@@ -1,6 +1,6 @@
 <servlet-mapping>
     <servlet-name>ListProducts</servlet-name>
-    <url-pattern>/ListProducts</url-pattern>
+    <url-pattern>/servlet/ListProducts</url-pattern>
     
     <servlet-name>Cart</servlet-name>
     <url-pattern>/Cart</url-pattern>

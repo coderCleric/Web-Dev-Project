@@ -29,18 +29,18 @@ public class ListProducts extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	response.setContentType("text/html");
             PrintWriter out = response.getWriter();
-        	out.print(Constants.PRE_CONTENT_TEMPLATE);
+        	out.print(Java_Classes.Constants.PRE_CONTENT_TEMPLATE);
 
             Connection mycon = null;
             Statement sql_stmt = null;
             ResultSet records = null;
             try {	                       
-                mycon = ConnectionHandler.getConnection();
+                mycon = Java_Classes.ConnectionHandler.getConnection();
                 sql_stmt = mycon.createStatement();  
                 records = sql_stmt.executeQuery("select * from cat_food");
          
                 out.println("<html><head><title>Cat Food Listing</title></head><body>");
-                out.println("<table border='1' cellpadding='6'>");
+                out.println("<table border='1' cellpadding='6' width='100%'>");
                 out.println("<tr>");
                    
                 out.println("<th>Cat Type</th>");
@@ -71,6 +71,6 @@ public class ListProducts extends HttpServlet {
             }
             
             catch(Exception e) {e.printStackTrace();} 
-            out.print(Constants.POST_CONTENT_TEMPLATE);
+            out.print(Java_Classes.Constants.POST_CONTENT_TEMPLATE);
         }
 }

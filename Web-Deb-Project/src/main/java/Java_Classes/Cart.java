@@ -28,7 +28,7 @@ public class Cart extends HttpServlet {
 		HttpSession session = request.getSession();
 		Map<Integer, Integer> customerCart = (HashMap<Integer, Integer>) session.getAttribute("customerCart");
 		PrintWriter out = response.getWriter();
-		Connection mycon = ConnectionHandler.getConnection();
+		Connection mycon = Java_Classes.ConnectionHandler.getConnection();
         
 		if (customerCart == null) {
 			customerCart = new HashMap<>();
@@ -38,7 +38,9 @@ public class Cart extends HttpServlet {
 		String addedProductID = request.getParameter("newProduct");
 		String modifiedProduct = request.getParameter("modifiedProduct");
 		String modifiedQuantity = request.getParameter("modifiedQuantity");
-		out.print(Constants.PRE_CONTENT_TEMPLATE);
+		out.print(Java_Classes.Constants.PRE_CONTENT_TEMPLATE);
+        out.println("<title>Your cart</title>");
+
 		
 		synchronized(customerCart) {
 			if (addedProductID != null) {
@@ -56,11 +58,10 @@ public class Cart extends HttpServlet {
 					customerCart.remove(Integer.parseInt(modifiedProduct));
 			}
 		
-			
+
 			if (customerCart.size() == 0) out.println("<h1>Your cart is empty.</h1>");
 			else {
-                out.println("<html><head><title>Cat Food Listing</title></head><body>");
-                out.println("<table border='1' cellpadding='6'>");
+                out.println("<table border='1' cellpadding='6' width='100%'>");
                 out.println("<tr>");
                    
                 out.println("<th>Cat Type</th>");
@@ -97,9 +98,10 @@ public class Cart extends HttpServlet {
 					}
 				}
 				out.println("</table>");
+				out.print(Java_Classes.Constants.POST_CONTENT_TEMPLATE);
+				
 			}
 		}
-		out.print(Constants.POST_CONTENT_TEMPLATE);
 		
 	}
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
