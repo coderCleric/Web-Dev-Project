@@ -33,8 +33,10 @@
 					<a href = "/Web-Deb-Project/Cart">Cart</a>
 					<!-- These links should only exist if the user is logged in -->
 					<%
-						if(session.getAttribute("userID") != null)
+						if(session.getAttribute("userID") != null) {
 							out.println("<br><a href = 'ModifyProduct.jsp'>Modify Products</a><br>");
+							out.println("<a href = 'ModifyOrder.jsp'>Modify Orders</a>");
+						}
 					%>
 				</td>
 			</tr>

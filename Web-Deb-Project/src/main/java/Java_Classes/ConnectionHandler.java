@@ -4,8 +4,10 @@ import java.sql.*;
 import javax.servlet.http.HttpServletRequest;
 
 public class ConnectionHandler {
-	private static String databaseName = "project2";
-	private static String databasePassword = "cba321";
+	//private static String databaseName = "project2";
+	//private static String databasePassword = "cba321";
+	private static String databaseName = "cat_database";
+	private static String databasePassword = "0uterW!ldsAETBGD";
 	private static Connection savedConnection = null;
 	
 	//Sets up and returns the connection to the database
@@ -193,6 +195,33 @@ public class ConnectionHandler {
 		String id = request.getParameter("id");
 		String command = "DELETE FROM cat_food WHERE id = '" + id + "'";
 			
+		//Actually complete the request
+		try {
+			Connection mycon = ConnectionHandler.getConnection();
+			Statement sql_stmt = mycon.createStatement();
+			sql_stmt.executeUpdate(command);
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
+	}
+	
+	//Performs the specified action on the orders table
+	//Returns true if the edit was successful, and false otherwise
+	public static boolean editOrder(HttpServletRequest request) {
+		String action = request.getParameter("action_type");
+		String command = "";
+
+		//Special case for the delete
+		if(action.equals("delete")) {
+			command = "DELETE FROM orders WHERE id = '" + request.getParameter("id") + "'";
+		}
+		
+		//If it's anything but delete
+		else {
+			command = "UPDATE orders SET state = '" + action + "' WHERE (id = '" + request.getParameter("id") + "');";
+		}
+		
 		//Actually complete the request
 		try {
 			Connection mycon = ConnectionHandler.getConnection();
