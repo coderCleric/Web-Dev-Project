@@ -38,4 +38,14 @@
     <servlet-name>ModifyProduct.jsp</servlet-name>
     <url-pattern>/ModifyProduct</url-pattern>
 </servlet-mapping>
+
+<servlet>
+    <servlet-name>LoginHandler.jsp</servlet-name>
+    <jsp-file>/JSP's/LoginHandler.jsp</jsp-file>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>LoginHandler.jsp</servlet-name>
+    <url-pattern>/LoginHandler</url-pattern>
+</servlet-mapping>
 </web-app>
