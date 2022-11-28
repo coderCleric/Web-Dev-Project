@@ -27,10 +27,10 @@
 				
 				<!-- The navigational sidebar -->
 				<td style = "width:20%; height:100%; vertical-align:top; background-color:green">
-					<a href = "/Web-Deb-Project/JSP's/Homepage.jsp">Homepage</a><br>
-					<a href = "Login.jsp">Login</a><br>
-					<a href = "/Web-Deb-Project/ListProducts">Products List</a><br>
-					<a href = "/Web-Deb-Project/Cart">Cart</a>
+					<a href = "/">Homepage</a><br>
+					<a href = "/Login">Login</a><br>
+					<a href = "/ListProducts">Products List</a><br>
+					<a href = "/Cart">Cart</a>
 					<!-- These links should only exist if the user is logged in -->
 					<%
 						if(session.getAttribute("userID") != null) {

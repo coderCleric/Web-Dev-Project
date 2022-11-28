@@ -1,7 +1,0 @@
-<servlet-mapping>
-    <servlet-name>ListProducts</servlet-name>
-    <url-pattern>/servlet/ListProducts</url-pattern>
-    
-    <servlet-name>Cart</servlet-name>
-    <url-pattern>/Cart</url-pattern>
-</servlet-mapping>
