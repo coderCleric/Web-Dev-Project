@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,13 +32,42 @@ public class Checkout extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		session.setAttribute("customerCart", null);
 		PrintWriter out = response.getWriter();
-
+		Map<Integer, Integer> customerCart = (HashMap<Integer, Integer>) session.getAttribute("customerCart");
+		
+		String order_contents = "";
+		for (Integer productID : customerCart.keySet()) {
+			ResultSet records = null;
+	        try {
+				Connection mycon = ConnectionHandler.getConnection();
+	            Statement sql_stmt = null;
+	            sql_stmt = mycon.createStatement();  
+				records = sql_stmt.executeQuery("select * from project2.cat_food WHERE id=" + productID);
+				while (records.next()) {
+					order_contents += customerCart.get(productID).toString() + ":" + records.getString("name") + " ";
+				}
+	        } catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		out.print(Java_Classes.Constants.PRE_CONTENT_TEMPLATE);
+		String command = "insert into orders (name, email, debit_card_number, state, address, order_contents) "
+				+ "values ('"+request.getParameter("name")+"', '"+request.getParameter("email")+"', '" +request.getParameter("debit_card_number") + "', 'Ordered', '" + request.getParameter("address") + "', '" + order_contents + "')";
+		
+		try {
+			Connection mycon = ConnectionHandler.getConnection();
+			Statement sql_stmt = mycon.createStatement();
+			sql_stmt.executeUpdate(command);
+			session.setAttribute("customerCart", null);
+			out.print("<h1>Checked out successfully, your cart is now empty.</h1>");
+		} catch(Exception e) {
+			out.print("<h1>Encountered a problem while checking out:</h1>");
+			out.print(e.getMessage());
+		}
 
-		out.print("<h1>Checked out successfully, your cart is now empty.</h1>");
 		out.print(Java_Classes.Constants.POST_CONTENT_TEMPLATE);
+		
     }
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
