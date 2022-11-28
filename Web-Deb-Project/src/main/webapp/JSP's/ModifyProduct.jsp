@@ -35,7 +35,7 @@
 	
 	<body>
 		<!-- Quick 'n dirty list of products -->
-		<table>
+		<table border="1">
 			<tr>
 				<td>id</td>
 				<td>cat type</td>

@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 public class ConnectionHandler {
 	//private static String databaseName = "project2";
 	//private static String databasePassword = "cba321";
-	private static String databaseName = "cat_database";
-	private static String databasePassword = "0uterW!ldsAETBGD";
+	private static String databaseName = "project2";
+	private static String databasePassword = "cba321";
 	private static Connection savedConnection = null;
 	
 	//Sets up and returns the connection to the database

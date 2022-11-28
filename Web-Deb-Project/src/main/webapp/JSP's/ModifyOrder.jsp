@@ -23,13 +23,15 @@
 	<body>
 		
 		<!-- Quick 'n dirty list of orders -->
-		<table>
+		<table border="1">
 			<tr>
 				<td>id</td>
 				<td>name</td>
 				<td>email</td>
 				<td>card number</td>
 				<td>state</td>
+				<td>address</td>
+				<td>order contents</td>
 			</tr>
 			<%
 				Connection mycon = ConnectionHandler.getConnection();
@@ -38,7 +40,7 @@
 				while(results.next()) {
 					out.println("<tr><td>" + results.getString("id") + "</td><td>" + results.getString("name") + "</td><td>" + 
 				results.getString("email") + "</td><td>" + results.getString("debit_card_number") + "</td><td>" + 
-							results.getString("state") + "</td></tr>");
+							results.getString("state") + "</td><td>" + results.getString("address") + "</td><td>"+results.getString("order_contents")+"</td></tr>");
 				}
 			%>
 		</table>

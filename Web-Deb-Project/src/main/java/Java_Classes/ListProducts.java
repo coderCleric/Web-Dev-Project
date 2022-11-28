@@ -39,8 +39,8 @@ public class ListProducts extends HttpServlet {
                 sql_stmt = mycon.createStatement();  
                 records = sql_stmt.executeQuery("select * from cat_food");
          
-                out.println("<html><head><title>Cat Food Listing</title></head><body>");
-                out.println("<table border='1' cellpadding='6' width='100%'>");
+                out.println("<head><title>Cat Food Listing</title></head><body>");
+                out.println("<table border='1' cellpadding='6' width='100%' style='margin-top:0px'>");
                 out.println("<tr>");
                    
                 out.println("<th>Cat Type</th>");

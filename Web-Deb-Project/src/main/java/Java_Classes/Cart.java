@@ -98,8 +98,10 @@ public class Cart extends HttpServlet {
 					}
 				}
                 out.println("<td colspan='6'><form action='Checkout' method='post'>");
-                out.println("Enter your physical address: <input type='text' name='address'/><br><br>");
+                out.println("Enter your name: <input type='text' name='address'/><br><br>");
                 out.println("Enter your email address: <input type='text' name='email'/>");
+                out.println("Enter your debit card number: <input type='text' name='debitcardnumber'/>");
+                out.println("Enter your physical address: <input type='text' name='address'/><br><br>");
 
                 out.println("<input type='submit' name='buy' value='Check out'/>");
                 out.println("</form></td>");
