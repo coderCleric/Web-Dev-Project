@@ -38,7 +38,7 @@
 		%>
 		
 		<!-- Make the buttons to return to the homepage or login screen -->
-		<a href = "Homepage.jsp"><button>Return to Homepage</button></a>
-		<a href = "Login.jsp"><button>Return to Login</button></a>
+		<a href = "Homepage"><button>Return to Homepage</button></a>
+		<a href = "Login"><button>Return to Login</button></a>
 	</body>
 </html>

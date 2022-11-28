@@ -62,7 +62,7 @@
 
 		<!-- Form for editing a product -->
 		<h3>Edit Product</h3>
-		<form action = "ModifyProduct.jsp" method = "post">
+		<form action = "ModifyProduct" method = "post">
 			<input type = "hidden" name = "edit">
 			<label>ID</label>
 			<input type = "text" name = "id"><br>
@@ -85,7 +85,7 @@
 		
 		<!-- Form for adding a product -->
 		<h3>Add Product</h3>
-		<form action = "ModifyProduct.jsp" method = "post">
+		<form action = "ModifyProduct" method = "post">
 			<input type = "hidden" name = "add">
 			<label>Cat Type</label>
 			<input type = "text" name = "cat_type"><br>
@@ -106,7 +106,7 @@
 		
 		<!-- Form for deleting a product -->
 		<h3>Delete Product</h3>
-		<form action = "ModifyProduct.jsp" method = "post">
+		<form action = "ModifyProduct" method = "post">
 			<input type = "hidden" name = "delete">
 			<label>ID</label>
 			<input type = "text" name = "id"><br>

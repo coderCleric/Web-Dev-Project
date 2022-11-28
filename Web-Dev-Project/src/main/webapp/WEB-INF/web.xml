@@ -48,4 +48,5 @@
     <servlet-name>LoginHandler.jsp</servlet-name>
     <url-pattern>/LoginHandler</url-pattern>
 </servlet-mapping>
+
 </web-app>

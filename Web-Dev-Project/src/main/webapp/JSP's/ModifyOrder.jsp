@@ -47,7 +47,7 @@
 	
 		<!-- The form for editing an order -->
 		<h3>Modify Order</h3>
-		<form action = "ModifyOrder.jsp" method = "post">
+		<form action = "ModifyOrder" method = "post">
 			<input type = "hidden" name = "edit">
 			<label>ID</label>
 			<input type = "text" name = "id"><br>

@@ -9,7 +9,7 @@
 	
 	<body>
 		<!-- The login form -->
-		<form action = "LoginHandler.jsp" method = "post">
+		<form action = "LoginHandler" method = "post">
 			<label>Username: </label>
 			<input type = "text" name = "givenUsername"><br>
 			<label>Password: </label>
