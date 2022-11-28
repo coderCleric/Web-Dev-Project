@@ -8,4 +8,34 @@
     <servlet-name>Homepage.jsp</servlet-name>
     <url-pattern>/</url-pattern>
 </servlet-mapping>
+
+<servlet>
+    <servlet-name>Login.jsp</servlet-name>
+    <jsp-file>/JSP's/Login.jsp</jsp-file>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>Login.jsp</servlet-name>
+    <url-pattern>/Login</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>ModifyOrder.jsp</servlet-name>
+    <jsp-file>/JSP's/ModifyOrder.jsp</jsp-file>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ModifyOrder.jsp</servlet-name>
+    <url-pattern>/ModifyOrder</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>ModifyProduct.jsp</servlet-name>
+    <jsp-file>/JSP's/ModifyProduct.jsp</jsp-file>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ModifyProduct.jsp</servlet-name>
+    <url-pattern>/ModifyProduct</url-pattern>
+</servlet-mapping>
 </web-app>

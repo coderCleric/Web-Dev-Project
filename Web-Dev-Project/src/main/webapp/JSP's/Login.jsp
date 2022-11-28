@@ -17,7 +17,5 @@
 			<button type = "submit">Login</button><br>
 		</form>
 		
-		<!-- The "make new account" button -->
-		<a href = "NewAccount.jsp"><button>Make New Account</button></a>
 	</body>
 </html>
