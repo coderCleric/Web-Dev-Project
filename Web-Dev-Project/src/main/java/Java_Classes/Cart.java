@@ -78,7 +78,7 @@ public class Cart extends HttpServlet {
 			        try {
 			            Statement sql_stmt=null;
 			            sql_stmt = mycon.createStatement();  
-						records = sql_stmt.executeQuery("select * from project2.cat_food WHERE id=" + productID);
+						records = sql_stmt.executeQuery("select * from cat_food WHERE id=" + productID);
 						out.println("<tr>");
 						while (records.next()) {
 							out.println("<td>" + records.getString("cat_type") + "</td>");

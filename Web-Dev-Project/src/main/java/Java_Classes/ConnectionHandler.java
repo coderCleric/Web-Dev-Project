@@ -4,10 +4,10 @@ import java.sql.*;
 import javax.servlet.http.HttpServletRequest;
 
 public class ConnectionHandler {
-	//private static String databaseName = "project2";
-	//private static String databasePassword = "cba321";
 	private static String databaseName = "project2";
 	private static String databasePassword = "cba321";
+	//private static String databaseName = "cat_database";
+	//private static String databasePassword = "0uterW!ldsAETBGD";
 	private static Connection savedConnection = null;
 	
 	//Sets up and returns the connection to the database
@@ -221,6 +221,22 @@ public class ConnectionHandler {
 		else {
 			command = "UPDATE orders SET state = '" + action + "' WHERE (id = '" + request.getParameter("id") + "');";
 		}
+		
+		//Actually complete the request
+		try {
+			Connection mycon = ConnectionHandler.getConnection();
+			Statement sql_stmt = mycon.createStatement();
+			sql_stmt.executeUpdate(command);
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
+	}
+	
+	//Adds a new user to the database
+	//Returns true if the edit was successful, and false otherwise
+	public static boolean addAccount(String username, String password) {
+		String command = "INSERT INTO employees (username, password) VALUES ('" + username + "',  '" + password + "')";
 		
 		//Actually complete the request
 		try {
