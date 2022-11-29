@@ -16,30 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `buy`
---
-
-DROP TABLE IF EXISTS `buy`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `buy` (
-  `customer_id` int DEFAULT NULL,
-  `food_id` int DEFAULT NULL,
-  `quantity` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `buy`
---
-
-LOCK TABLES `buy` WRITE;
-/*!40000 ALTER TABLE `buy` DISABLE KEYS */;
-INSERT INTO `buy` VALUES (1,2,3),(2,3,1),(1,1,1),(2,1,1),(4,1,1);
-/*!40000 ALTER TABLE `buy` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `cat_food`
 --
 
@@ -70,82 +46,30 @@ INSERT INTO `cat_food` VALUES (1,'small cat','bladder support','$9000000','$3','
 UNLOCK TABLES;
 
 --
--- Table structure for table `customer`
+-- Table structure for table `customers`
 --
 
-DROP TABLE IF EXISTS `customer`;
+DROP TABLE IF EXISTS `customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customer` (
-  `id` int DEFAULT NULL,
+CREATE TABLE `customers` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `debit_card_number` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `debit_card_number` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `customer`
+-- Dumping data for table `customers`
 --
 
-LOCK TABLES `customer` WRITE;
-/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'Joe Smith','joe@smith.com',1234),(2,'John Smith','john@smith.com',88392),(3,'Jacob Nartker','jacob@nartker.com',902342),(4,'Seymour Database','seymour@database.com',3288392),(5,'Seymour JDBC','seymour@jdbc.com',32328392);
-/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `customer_billing_address`
---
-
-DROP TABLE IF EXISTS `customer_billing_address`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customer_billing_address` (
-  `customer_id` int DEFAULT NULL,
-  `state` varchar(255) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `country` varchar(255) DEFAULT NULL,
-  `street` varchar(255) DEFAULT NULL,
-  `zip` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `customer_billing_address`
---
-
-LOCK TABLES `customer_billing_address` WRITE;
-/*!40000 ALTER TABLE `customer_billing_address` DISABLE KEYS */;
-INSERT INTO `customer_billing_address` VALUES (1,'NM','Socorro','USA','801 Leroy',87801),(2,'NM','Socorro','USA','812 Leroy',87801),(3,'NM','Socorro','USA','899 Leroy',87801),(4,'NM','Socorro','USA','112 Leroy',87801),(5,'NM','Socorro','USA','111 California',87801);
-/*!40000 ALTER TABLE `customer_billing_address` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `customer_shipping_address`
---
-
-DROP TABLE IF EXISTS `customer_shipping_address`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customer_shipping_address` (
-  `customer_id` int DEFAULT NULL,
-  `state` varchar(255) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `country` varchar(255) DEFAULT NULL,
-  `street` varchar(255) DEFAULT NULL,
-  `zip` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `customer_shipping_address`
---
-
-LOCK TABLES `customer_shipping_address` WRITE;
-/*!40000 ALTER TABLE `customer_shipping_address` DISABLE KEYS */;
-INSERT INTO `customer_shipping_address` VALUES (1,'NM','Socorro','USA','801 Leroy',87801),(2,'NM','Socorro','USA','812 Leroy',87801),(3,'NM','Socorro','USA','899 Leroy',87801),(4,'NM','Socorro','USA','112 Leroy',87801),(5,'NM','Socorro','USA','111 California',87801);
-/*!40000 ALTER TABLE `customer_shipping_address` ENABLE KEYS */;
+LOCK TABLES `customers` WRITE;
+/*!40000 ALTER TABLE `customers` DISABLE KEYS */;
+INSERT INTO `customers` VALUES (1,'john smith','john@smith.com','123456','123 leroy ave'),(2,'joe','smith@joe.com','1231241','123 joe street'),(3,'joe','smith@joe.com','1231241','123 joe street'),(4,'john smith','1231','3241341','asdfadf'),(5,'john smith','1231','3241341','asdfadf'),(6,'Joseph Smith','joseph@smith.com','123456','123 joseph street'),(7,'Brayden Dudleyson','brayden@dudleyson.com','123123','abc'),(8,'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','12312','aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+/*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -189,7 +113,7 @@ CREATE TABLE `orders` (
   `address` varchar(255) DEFAULT NULL,
   `order_contents` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,84 +122,8 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (3,'Joe Smith','joe@smith.com','12345','Delivered','111 leroy place','1:Frisky Kidney Aid 1:raw meat '),(4,'John Smith','joHn@smith.com','123455','Ordered','111 leroy','7:Frisky Kidney Aid ');
+INSERT INTO `orders` VALUES (3,'Joe Smith','joe@smith.com','12345','Delivered','111 leroy place','1:Frisky Kidney Aid 1:raw meat '),(4,'John Smith','joHn@smith.com','123455','Ordered','111 leroy','7:Frisky Kidney Aid '),(6,'jonathan smith','abadvas','213123','Ordered','adadsf','1:Large Cat Standard '),(7,'joe','123','123123','Ordered','asdf','1:Frisky Kidney Aid '),(8,'john smith','1231','3241341','Ordered','asdfadf','1:Discount Frisky Kidney Aid '),(9,'Brayden Dudleyson','brayden@dudleyson.com','123123','Ordered','abc','1:Frisky Kidney Aid 1:raw meat ');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `supplier`
---
-
-DROP TABLE IF EXISTS `supplier`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `supplier` (
-  `id` int DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `phone` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `supplier`
---
-
-LOCK TABLES `supplier` WRITE;
-/*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
-INSERT INTO `supplier` VALUES (1,'Frisky Kidney Aid Supplier','frisky@kidneyaid.com',9992222),(2,'Discount Frisky Kidney Aid Supplier','discountfrisky@kidneyaid.com',9982222),(3,'Small Cat Supplier','smallcat@standardfood.com',8992222),(4,'Medium Cat Supplier','medium@standardfood.com',9392222),(5,'Large Cat Supplier','large@standardfood.com',3332222);
-/*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `supplier_address`
---
-
-DROP TABLE IF EXISTS `supplier_address`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `supplier_address` (
-  `customer_id` int DEFAULT NULL,
-  `state` varchar(255) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `country` varchar(255) DEFAULT NULL,
-  `street` varchar(255) DEFAULT NULL,
-  `zip` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `supplier_address`
---
-
-LOCK TABLES `supplier_address` WRITE;
-/*!40000 ALTER TABLE `supplier_address` DISABLE KEYS */;
-INSERT INTO `supplier_address` VALUES (1,'NM','Albuquerque','USA','Coors Blvd',87507),(2,'NM','Albuquerque','USA','55 Coors Blvd',87507),(3,'NM','Albuquerque','USA','55 Menaul Blvd',87507),(4,'NM','Albuquerque','USA','132 Menaul Blvd',87507),(5,'NM','Albuquerque','USA','132 Menaul Blvd',87507);
-/*!40000 ALTER TABLE `supplier_address` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `supply`
---
-
-DROP TABLE IF EXISTS `supply`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `supply` (
-  `supplier_id` int DEFAULT NULL,
-  `food_id` int DEFAULT NULL,
-  `quantity` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `supply`
---
-
-LOCK TABLES `supply` WRITE;
-/*!40000 ALTER TABLE `supply` DISABLE KEYS */;
-INSERT INTO `supply` VALUES (5,3,12),(4,5,12),(3,4,12),(1,1,44),(2,2,55);
-/*!40000 ALTER TABLE `supply` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -287,4 +135,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-27 19:11:39
+-- Dump completed on 2022-11-28 22:33:49
