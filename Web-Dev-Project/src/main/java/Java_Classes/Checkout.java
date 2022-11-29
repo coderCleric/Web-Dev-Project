@@ -52,22 +52,62 @@ public class Checkout extends HttpServlet {
 		}
 		
 		out.print(Java_Classes.Constants.PRE_CONTENT_TEMPLATE);
-		String command = "insert into orders (name, email, debit_card_number, state, address, order_contents) "
-				+ "values ('"+request.getParameter("name")+"', '"+request.getParameter("email")+"', '" +request.getParameter("debit_card_number") + "', 'Ordered', '" + request.getParameter("address") + "', '" + order_contents + "')";
+		out.println("<title>Check out</title>");
 		
-		try {
-			Connection mycon = ConnectionHandler.getConnection();
-			Statement sql_stmt = mycon.createStatement();
-			sql_stmt.executeUpdate(command);
-			session.setAttribute("customerCart", null);
-			out.print("<h1>Checked out successfully, your cart is now empty.</h1>");
-		} catch(Exception e) {
-			out.print("<h1>Encountered a problem while checking out:</h1>");
-			out.print(e.getMessage());
+		if (request.getParameter("checkoutWithSavedPaymentInfo") == null) {
+			String command = "insert into orders (name, email, debit_card_number, state, address, order_contents) "
+					+ "values ('"+request.getParameter("name")+"', '"+request.getParameter("email")+"', '" +request.getParameter("debit_card_number") + "', 'Ordered', '" + request.getParameter("address") + "', '" + order_contents + "')";
+			
+			try {
+				Connection mycon = ConnectionHandler.getConnection();
+				Statement sql_stmt = mycon.createStatement();
+				sql_stmt.executeUpdate(command);
+				session.setAttribute("customerCart", null);
+				out.print("<h1>Checked out successfully, your cart is now empty.</h1>");
+			} catch(Exception e) {
+				out.print("<h1>Encountered a problem while checking out:</h1>");
+				out.print(e.getMessage());
+			}
+		} else {
+			out.print("<h1>Checking out with saved payment info...</h1>");
+            
+            String name = null;
+            String email = null;
+            String debit_card_number = null;
+            String address = null;
+            
+			ResultSet records = null;
+	        try {
+				Connection mycon = ConnectionHandler.getConnection();
+	            Statement sql_stmt=null;
+	            sql_stmt = mycon.createStatement();  
+				records = sql_stmt.executeQuery("select * from customers WHERE id=" + session.getAttribute("customerId"));
+				while (records.next()) {
+					name = records.getString("name");
+					email = records.getString("email");
+					debit_card_number = records.getString("debit_card_number");
+					address = records.getString("address");
+				}
+				
+				String command = "insert into orders (name, email, debit_card_number, state, address, order_contents) "
+						+ "values ('"+name+"', '"+email+"', '" +debit_card_number+ "', 'Ordered', '" +address+ "', '" + order_contents + "')";
+				
+				try {
+					sql_stmt.executeUpdate(command);
+					session.setAttribute("customerCart", null);
+					out.print("<h1>Checked out successfully, your cart is now empty.</h1>");
+				} catch(Exception e) {
+					out.print("<h1>Encountered a problem while checking out:</h1>");
+					out.print(e.getMessage());
+				}
+				
+	        } catch (SQLException e) {
+				e.printStackTrace();
+			}
+	        
 		}
 
 		out.print(Java_Classes.Constants.POST_CONTENT_TEMPLATE);
-		
     }
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

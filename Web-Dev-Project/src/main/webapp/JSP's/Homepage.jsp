@@ -28,9 +28,10 @@
 				<!-- The navigational sidebar -->
 				<td style = "width:20%; height:100%; vertical-align:top; background-color:green">
 					<a href = "Homepage">Homepage</a><br>
-					<a href = "Login">Login</a><br>
+					<a href = "Login">Employee Login</a><br>
 					<a href = "ListProducts">Products List</a><br>
-					<a href = "Cart">Cart</a>
+					<a href = "Cart">Cart</a><br>
+					<a href= "SavePaymentInfo">Save payment info</a>
 					<!-- These links should only exist if the user is logged in -->
 					<%
 						if(session.getAttribute("userID") != null) {

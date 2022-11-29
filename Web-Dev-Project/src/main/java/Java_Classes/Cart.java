@@ -98,14 +98,22 @@ public class Cart extends HttpServlet {
 					}
 				}
                 out.println("<td colspan='6'><form action='Checkout' method='post'>");
-                out.println("Enter your name: <input type='text' name='name'/><br><br>");
-                out.println("Enter your email address: <input type='text' name='email'/><br><br>");
-                out.println("Enter your debit card number: <input type='number' name='debit_card_number'/><br><br>");
-                out.println("Enter your physical address: <input type='text' name='address'/><br><br>");
+                out.println("Enter your name: <input type='text' name='name' required/><br><br>");
+                out.println("Enter your email address: <input type='text' name='email' required/><br><br>");
+                out.println("Enter your debit card number: <input type='number' name='debit_card_number' required/><br><br>");
+                out.println("Enter your physical address: <input type='text' name='address' required/><br><br>");
 
                 out.println("<input type='submit' name='buy' value='Check out'/>");
                 out.println("</form></td>");
+                
+                if (session.getAttribute("customerId") != null) {
+                	out.println("<tr><td colspan='6'><form action='Checkout' method='post'>");
+                	out.println("<input type='hidden' name='checkoutWithSavedPaymentInfo' value='saved'/>");
+                	out.println("<input type='submit' name='buy' value='Check out using saved payment info'/>");
+                	out.println("</form></td></tr>");
+                }
 				out.println("</table>");
+                
 				
 			}
 			out.print(Java_Classes.Constants.POST_CONTENT_TEMPLATE);
